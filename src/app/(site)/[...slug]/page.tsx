@@ -1,11 +1,11 @@
-import { ReactNode } from "react"
 
 type PageProps = {
-    params: { slug: string[] }
+    params: Promise<{ slug: string[] }>
 }
 
-export default function Page(props: PageProps) {
-    const { params } = props
+export default async function Page(props: PageProps) {
+    const { params: _params } = props
+    const params = await _params
     return (
         <div>
             <h1>{params.slug.join('/')}</h1>
