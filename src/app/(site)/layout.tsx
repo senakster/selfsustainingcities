@@ -10,11 +10,11 @@ export default function PageLayout(props: PageLayoutProps) {
     const { children } = props
     return (
         <div className="h-screen grid grid-cols-1 grid-rows-[auto_1fr_auto]">
-            <Header className={'bg-amber-400'} />
-            <main className="bg-teal-400">
+            <Header className={'bg-fuchsia-950'} />
+            <main className="">
                 {children}
             </main>
-            <Footer className="bg-pink-400" />
+            <Footer className="bg-fuchsia-950" />
         </div>
     )
 }
