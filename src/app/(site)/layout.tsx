@@ -1,4 +1,4 @@
-import { Children, ReactNode } from "react"
+import { ReactNode } from "react"
 import Header from "@/components/Layout/Header/Header"
 import Footer from "@/components/Layout/Footer/Footer"
 type PageLayoutProps = {

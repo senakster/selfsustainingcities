@@ -11,7 +11,7 @@ export default async function Home() {
     return (
         <div>
             <h1>
-                Self-Sustaining Cities
+                {title}
             </h1>
             <pre>
                 {JSON.stringify(page)}

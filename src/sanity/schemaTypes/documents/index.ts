@@ -1,4 +1,6 @@
 import page from "./page"
 
 
-export default [page]
+export const documents = [page]
+
+export default documents

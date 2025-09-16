@@ -1,5 +1,5 @@
 import { defineField, defineType } from "sanity";
-
+import components from '../components'
 export default defineType({
     name: 'page',
     type: 'document',
@@ -28,6 +28,16 @@ export default defineType({
             to: [{
                 type: 'page'
             }],
+            hidden: ({ document }) => {
+                console.log(document?.slug)
+                return document?.slug == '/'
+            }
+        }),
+        defineField({
+            title: 'Content',
+            name: 'content',
+            type: 'array',
+            of: [...components.map(c => ({ type: c.type }))],
             hidden: ({ document }) => {
                 console.log(document?.slug)
                 return document?.slug == '/'
