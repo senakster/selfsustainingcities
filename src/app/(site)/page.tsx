@@ -1,8 +1,20 @@
-export default function Home() {
+import { client } from "@/sanity/lib/client"
+import { pageQuery, type PageQueryProps } from "@/adapters/sanity/queries/page.query"
+import { notFound } from "next/navigation"
+
+export default async function Home() {
+    const page = await client.fetch<PageQueryProps>(pageQuery, { slug: ['/'] })
+    if (!page) {
+        notFound()
+    }
+    const { title } = page
     return (
         <div>
             <h1>
                 Self-Sustaining Cities
             </h1>
+            <pre>
+                {JSON.stringify(page)}
+            </pre>
         </div>)
 } 
