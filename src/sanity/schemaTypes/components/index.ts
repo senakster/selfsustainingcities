@@ -1,7 +1,5 @@
 import textblock from "./textblock";
 
-export const components = [
-    textblock
-]
+export const components = [textblock];
 
-export default components
+export default components;

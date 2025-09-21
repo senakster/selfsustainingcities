@@ -1,12 +1,12 @@
-import { defineField, defineType } from "sanity"
+import { defineField, defineType } from "sanity";
 
 export default defineType({
-    name: 'textblock',
-    type: 'object',
-    fields: [
-        defineField({
-            name: 'text',
-            type: 'portabletext',
-        })
-    ]
-})
+  name: "textblock",
+  type: "object",
+  fields: [
+    defineField({
+      name: "text",
+      type: "portabletext",
+    }),
+  ],
+});

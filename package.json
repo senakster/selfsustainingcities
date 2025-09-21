@@ -7,9 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "format": "prettier --write .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@portabletext/react": "^4.0.3",
+    "@portabletext/types": "^2.0.15",
+    "@sanity/document-internationalization": "^4.0.0",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^4.8.1",
@@ -21,6 +25,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "sanity": "^4.8.1",
+    "sanity-plugin-iframe-pane": "^4.0.0",
     "styled-components": "^6.1.19",
     "tailwind-merge": "^3.3.1"
   },
