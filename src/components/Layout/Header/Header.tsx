@@ -2,6 +2,7 @@ import LanguageSwitcher from "@/components/Atoms/ALanguageSwitcher/ALanguageSwit
 import { locales } from "@/lib/i18n/locales";
 import { cn } from "@/lib/utils/cn";
 import Link from "@/components/Atoms/AFlexibleLink/AFlexibleLink";
+import Container from '@/components/Layout/Container/Container'
 
 type HeaderProps = {
   className: string;
@@ -11,14 +12,15 @@ export default function Header(props: HeaderProps) {
   const { className, locale, ...rest } = props;
   return (
     <header
-      className={cn(`grid grid-rows-1 grid-cols-[1fr_auto] ${className}`)}
+      className={cn(`${className} py-4 backdrop-blur-lg`)}
       {...rest}
     >
+      <Container className={'grid grid-rows-1 grid-cols-[1fr_auto]'}>
       <div>
-        <Link href="/" locale={locale}> Logo (home)</Link>
+        <Link href="/" locale={locale}>{`[Logo]`}</Link>
       </div>
       <ul className="w-min flex gap-2 justify-between">
-        <li>
+        {/* <li>
           <Link href={"/about"} locale={locale}>About</Link>
         </li>
         <li>
@@ -26,11 +28,12 @@ export default function Header(props: HeaderProps) {
         </li>
         <li>
           <Link href={"/contact"} locale={locale}>Contact</Link>
-        </li>
+        </li> */}
         <li>
           <LanguageSwitcher locale={locale} />
         </li>
       </ul>
+      </Container>
     </header>
   );
 }
