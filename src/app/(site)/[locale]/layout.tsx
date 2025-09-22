@@ -28,9 +28,9 @@ export default async function LocaleLayout(props: LocaleLayoutProps) {
       className={`antialiased`}
     >
         <body className="h-[100dvh] max-h-full grid grid-cols-1 grid-rows-[auto_1fr_auto] overflow-y-auto overflow-x-hidden">
-          <Header className={"border-b sticky top-0"} locale={locale as typeof locales[number]} />
+          <Header className={"sticky top-0"} locale={locale as typeof locales[number]} />
             <main className="">{children}</main>
-          <Footer className="border-t sticky bottom-0" />
+          <Footer className="sticky bottom-0" />
         </body>
       </html>
     );
