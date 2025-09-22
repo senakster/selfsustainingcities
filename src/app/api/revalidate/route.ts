@@ -30,3 +30,11 @@ export async function POST(request: NextRequest) {
     headers: { "Content-Type": "application/json" },
   });
 }
+
+export async function GET() {
+  revalidateAllPages();
+  return new Response(JSON.stringify({ message: "Revalidated all pages" }), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
+}

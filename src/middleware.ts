@@ -32,7 +32,7 @@ export default function middleware(request: NextRequest) {
 // Match all paths except for the following:
 export const config = {
   matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|studio|robots.txt|\.well-known/appspecific/com.chrome.devtools.json).*)",
+    "/((?!api|_next/static|_next/image|assets|favicon.ico|sitemap.xml|studio|robots.txt|\.well-known/appspecific/com.chrome.devtools.json).*)",
     "/",
   ],
 };

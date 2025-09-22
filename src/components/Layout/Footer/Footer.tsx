@@ -8,7 +8,7 @@ type FooterProps = {
 export default function Footer(props: FooterProps) {
   const { className, ...rest } = props;
   return (
-    <footer className={cn('py-4 backdrop-blur-lg',className)} {...rest}>
+    <footer className={cn('py-4 backdrop-blur-lg pt-10 mask-[linear-gradient(to_top,black_calc(100%-40px),transparent_100%)]',className)} {...rest}>
       <Container>
       Footer
       </Container>

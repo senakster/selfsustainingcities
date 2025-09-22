@@ -3,6 +3,7 @@ import { locales } from "@/lib/i18n/locales";
 import { cn } from "@/lib/utils/cn";
 import Link from "@/components/Atoms/AFlexibleLink/AFlexibleLink";
 import Container from '@/components/Layout/Container/Container'
+import ALogo from "@/components/Atoms/ALogo/ALogo";
 
 type HeaderProps = {
   className: string;
@@ -11,13 +12,15 @@ type HeaderProps = {
 export default function Header(props: HeaderProps) {
   const { className, locale, ...rest } = props;
   return (
-    <header
-      className={cn(`${className} py-4 backdrop-blur-lg`)}
+    <header 
+      className={cn(`${className} sticky top-0 backdrop-blur-lg py-4 pb-10 mask-[linear-gradient(to_bottom,black_calc(100%-40px),transparent_100%)]`)}
       {...rest}
     >
-      <Container className={'grid grid-rows-1 grid-cols-[1fr_auto]'}>
+      <Container className={'grid grid-rows-1 grid-cols-[1fr_auto] text-shadow-lg/30'}>
       <div>
-        <Link href="/" locale={locale}>{`[Logo]`}</Link>
+        <Link href="/" locale={locale}>
+        <ALogo />
+        </Link>
       </div>
       <ul className="w-min flex gap-2 justify-between">
         {/* <li>
