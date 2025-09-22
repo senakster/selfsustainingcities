@@ -11,8 +11,8 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-        name: 'byline',
-        title: 'By line',
+        name: 'leadText',
+        title: 'Lead text',
         type: 'textblock',
       }),
     defineField({

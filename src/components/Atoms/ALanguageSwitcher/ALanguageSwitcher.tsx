@@ -1,5 +1,6 @@
 import { locales, supportedLanguages } from '@/lib/i18n/locales'
-
+import AIcon from '@/components/Atoms/AIcon/AIcon'
+import languageIcon from '@/assets/icons/language'
 export default function LanguageSwitcher({ locale }: { locale: typeof locales[number] }) {
   const restLanguages = supportedLanguages
     .filter((lang) => {

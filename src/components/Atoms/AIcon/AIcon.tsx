@@ -7,10 +7,12 @@ const svgStringToB64 = (svgString: string) => {
   return `data:image/svg+xml;base64,${Buffer.from(svgString).toString('base64')}`;
 }
 export default function AIcon({img, className, alt, color}: {img: ImageProps | string, className?: string, alt?: string, color?: string}) {
+  console.log(img)
+  if(!img) return null
   const { className: imgClassName, alt: imgAlt,...rest } = typeof img === 'object' ? img : {};
   const iconColor = color || "var(--color-foreground)";
   const altText = alt || imgAlt;
-  const imgUrl = typeof img === 'string' ? null : urlFor(img).toString();
+  const imgUrl = typeof img === 'string' ? null : urlFor(img)?.toString();
   const svgString = typeof img === 'string' ? svgStringToB64(img) : null;
   const maskStyle = {
     backgroundColor: iconColor,

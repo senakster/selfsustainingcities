@@ -5,9 +5,9 @@ import type { PortableTextMarkDefinition } from '@portabletext/types'
 // import { TBaseImage } from '@/sanity/schemas/fields/baseImage/baseImage.props'
 // import { tap } from 'rxjs/operators';
 
-export default function PortableTextResolver({ text }: { text: PortableTextMarkDefinition }) {
+export default function PortableTextResolver({ text }: { text?: PortableTextMarkDefinition }) {
   return (
-      <PortableText value={text} components={components} />
+      <PortableText value={text || []} components={components} />
   )
 }
 
