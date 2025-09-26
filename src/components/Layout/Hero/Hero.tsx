@@ -16,7 +16,7 @@ export default function Hero (props: HeroProps) {
     
     return (
         <div className={cn(className)}>
-            <div className="hero-content text-shadow-lg/30 flex flex-col gap-12">
+            <div className="hero-content flex flex-col gap-12">
                 <div className="fixed inset-0 -z-10 min-w-screen min-h-screen object-cover">
                     <AImage className="w-full h-full object-cover" imageObj={image} width={1920} aspectRatio={19/6}  priority/>   
                     <div className="absolute inset-0 bg-(--background)/80" />

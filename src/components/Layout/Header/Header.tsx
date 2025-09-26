@@ -16,7 +16,7 @@ export default function Header(props: HeaderProps) {
       className={cn(`${className} sticky top-0 backdrop-blur-lg py-4 pb-10 mask-[linear-gradient(to_bottom,black_calc(100%-40px),transparent_100%)]`)}
       {...rest}
     >
-      <Container className={'grid grid-rows-1 grid-cols-[1fr_auto] text-shadow-lg/30'}>
+      <Container className={'grid grid-rows-1 grid-cols-[1fr_auto]'}>
       <div>
         <Link href="/" locale={locale}>
         <ALogo />

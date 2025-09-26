@@ -50,7 +50,6 @@ export default async function Home(props: HomeProps) {
   return (
     <div className="py-12">
       <Hero {...hero} />
-        
         {/* <SectionsResolver sections={[{_type: 'textblock', _key: 'textblock', text: hero.byline.text as PortableTextMarkDefinition}]} /> */}
         
     </div>
