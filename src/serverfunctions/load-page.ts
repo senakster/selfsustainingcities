@@ -9,9 +9,13 @@ export async function getPage({ slug, language, isPreview }: { slug: string[], l
   const currentSlug = slug[0] || null;
   const parentSlug = slug[1] || null;
   const grandParentSlug = slug[2] || null;
-  return await sanityClient<PageQueryProps>({ query: pageQuery, params: { slug: currentSlug, language, parentSlug, grandParentSlug }, isPreview });
+  const page = await sanityClient<PageQueryProps>({ query: pageQuery, params: { slug: currentSlug, language, parentSlug, grandParentSlug }, isPreview });
+  console.log('get page: headline', page.hero?.headline);
+  return page;
 }
 
 export async function getPagesParams({ locale, isPreview }: { locale: string, isPreview?: boolean }) {
-  return await sanityClient<{slugs: string[], language: string }[]>({ query: pagesParamsQuery, params: { locale }, isPreview });
+  const pagesParams = await sanityClient<{slugs: string[], language: string }[]>({ query: pagesParamsQuery, params: { locale }, isPreview });
+  console.log('pagesParams', pagesParams);
+  return pagesParams;
 }

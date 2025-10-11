@@ -7,11 +7,12 @@ import isDraftMode from "@/sanity/lib/helpers/isDraftMode"
 
 type PageProps = { slug: string[], locale: string }
 
+export const revalidate = 10; // seconds
+
 export async function generateStaticParams({ params }: { params: { locale: string, slug: string[] } }) {
   const { locale } = params;
   const data = await getPagesParams({ locale });
   const pageParams = data.map(({ slugs, language }) => ({ slug: [ ...slugs], locale: language }))
-
   return pageParams;  
 }
 

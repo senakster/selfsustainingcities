@@ -9,6 +9,8 @@ type HomeProps = {
   params: Promise<{ locale: string }>;
 };
 
+export const revalidate = 10; // seconds
+
 export async function generateMetadata ({params}: {params: Promise<{locale: string}>}) {
   const page = await getPage({ slug: [], language: (await params).locale || locales[0] });
   if (!page) {
@@ -18,7 +20,7 @@ export async function generateMetadata ({params}: {params: Promise<{locale: stri
     }
   }
   const { title, slug, seo} = page;
- ;
+ 
   return {
     title: `${title} ${[slug].flat(1)?.filter(Boolean).length > 0 ? '| self-sustaining cities' : ''}`,
     description: seo?.description || title,
@@ -34,7 +36,6 @@ export async function generateMetadata ({params}: {params: Promise<{locale: stri
 export default async function Home(props: HomeProps) {
   const { params: _params } = props;
   const isPreview = await isDraftMode()
-
   const params = await _params;
   const page = await getPage({ slug: [], language: params.locale || locales[0], isPreview });
   if (!page) {
