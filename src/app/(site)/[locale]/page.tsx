@@ -42,7 +42,7 @@ export default async function Home(props: HomeProps) {
     notFound();
   }
 
-  const { title, hero, content, slug, language } = page;
+  const { hero, content, language } = page;
   return (
     <div className="py-12">
       <Hero {...hero} />
