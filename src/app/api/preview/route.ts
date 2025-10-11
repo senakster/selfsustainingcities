@@ -2,7 +2,7 @@ import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
 
-const previewToken = process.NEXT_PUBLIC_PREVIEW_TOKEN
+const previewToken = process.env.NEXT_PUBLIC_PREVIEW_TOKEN
 
 export async function GET(request: NextRequest) {
     
@@ -12,8 +12,8 @@ export async function GET(request: NextRequest) {
     return redirect('/api/exit-preview')
   }
 
-  const redirPath = searchParams.get('redirect') ?? '/'
+  const redirPath = searchParams.get('redirect') ?? '/' as string
 
-  draftMode().enable()
+  (await draftMode()).enable()
   return redirect(redirPath)
 }
