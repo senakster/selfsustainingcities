@@ -11,10 +11,10 @@ type LocaleLayoutProps = {
   params: Promise<{locale: string}>
 };
 
-export const dynamic = 'force-static';
-// export async function generateStaticParams() {
-//   return locales.map((locale) => ({ locale }))
-// }
+
+export async function generateStaticParams() {
+  return locales.map((locale) => ({ locale }))
+}
 
 export const metadata: Metadata = {
   title: "Self-sustaining Cities",
