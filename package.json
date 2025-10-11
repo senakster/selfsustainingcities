@@ -16,6 +16,7 @@
     "@sanity/document-internationalization": "^4.0.0",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.2.0",
+    "@sanity/studio-secrets": "^3.0.2",
     "@sanity/vision": "^4.8.1",
     "clsx": "^2.1.1",
     "next": "15.5.3",

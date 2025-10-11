@@ -1,19 +1,16 @@
-import { sanityClient } from "@/sanity/lib/client";
-import {
-  pageQuery,
-  type PageQueryProps,
-} from "@/adapters/sanity/queries/page.query";
 import { notFound } from "next/navigation";
 import {locales } from '@/lib/i18n/locales'
 import SectionsResolver from "@/components/Layout/SectionsResolver/SectionsResolver";
 import Hero from '@/components/Layout/Hero/Hero';
+import { getPage } from "@/serverfunctions/load-page";
+import isDraftMode from "@/sanity/lib/helpers/isDraftMode"
 
 type HomeProps = {
   params: Promise<{ locale: string }>;
 };
 
 export async function generateMetadata ({params}: {params: Promise<{locale: string}>}) {
-  const page = await sanityClient<PageQueryProps>({ query: pageQuery, params: { slug: [], language: (await params).locale || locales[0] } });
+  const page = await getPage({ slug: [], language: (await params).locale || locales[0] });
   if (!page) {
     return {
       title: 'Home',
@@ -36,8 +33,10 @@ export async function generateMetadata ({params}: {params: Promise<{locale: stri
 
 export default async function Home(props: HomeProps) {
   const { params: _params } = props;
+  const isPreview = await isDraftMode()
+
   const params = await _params;
-  const page = await sanityClient<PageQueryProps>({ query: pageQuery, params: { slug: [], language: params.locale || locales[0] } });
+  const page = await getPage({ slug: [], language: params.locale || locales[0], isPreview });
   if (!page) {
     notFound();
   }
@@ -47,6 +46,7 @@ export default async function Home(props: HomeProps) {
     <div className="py-12">
       <Hero {...hero} />
       <SectionsResolver sections={content || []} locale={language as typeof locales[number]} />
+      {isPreview ? <p>preview</p> : null}
     </div>
   );
 }

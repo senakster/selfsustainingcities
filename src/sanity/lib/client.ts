@@ -3,21 +3,23 @@ import 'server-only'
 import { createClient } from "next-sanity";
 import isDraftMode from "./helpers/isDraftMode"
 import { apiVersion, dataset, projectId } from "../env";
-import { editorToken  } from "../env";
-
 type TSanityFetchProps = {
+  isPreview?: boolean
+  token?: string
   query: string
   params?: object
   tags?: string[]
 }
 
 export async function sanityClient<T>({
+  isPreview,
   query,
   params = {},
   tags = [],
 }: TSanityFetchProps): Promise<T> {
-  const isPreview = await isDraftMode() || process.env.NODE_ENV === 'development'
-
+  'use server'
+  const token = process.env.SANITY_STUDIO_EDITOR_TOKEN;
+  
     return createClient({
       projectId,
       dataset,
@@ -26,13 +28,13 @@ export async function sanityClient<T>({
     }).fetch<T>(query, params, {
     ...(isPreview
       ? {
-          token: editorToken,
+          token,
           perspective: 'drafts',
           useCdn: false,
           cache: 'no-store',
         }
       : {
-          token: editorToken,
+          token,
           perspective: 'published',
           useCdn: true,
           cache: 'force-cache',

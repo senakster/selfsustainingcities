@@ -9,11 +9,11 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
   
   if (searchParams.get('token') != previewToken) {
-    return redirect('/api/exit-preview')
+    return redirect('/api/preview/disable')
   }
 
-  const redirPath = searchParams.get('redirect') ?? '/' as string
+  const redirPath = searchParams.get('redirect') || '/'
 
-  (await draftMode()).enable()
+  ;(await draftMode()).enable()
   return redirect(redirPath)
 }

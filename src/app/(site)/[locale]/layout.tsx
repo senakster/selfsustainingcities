@@ -1,8 +1,10 @@
 import Header from "@/components/Layout/Header/Header";
 import Footer from "@/components/Layout/Footer/Footer";
+import ExitPreviewButton from "@/components/Layout/ExitPreviewButton/ExitPreviewButton"
 import { ReactNode } from "react";
 import { locales } from "@/lib/i18n/locales";
 import type { Metadata } from "next";
+import isDraftMode from '@/sanity/lib/helpers/isDraftMode'
 
 type LocaleLayoutProps = {
   children: ReactNode;
@@ -30,6 +32,7 @@ export default async function LocaleLayout(props: LocaleLayoutProps) {
         <body className="h-[100dvh] max-h-full grid grid-cols-1 grid-rows-[auto_1fr_auto] overflow-y-auto overflow-x-hidden">
           <Header className={"sticky top-0"} locale={locale as typeof locales[number]} />
             <main className="">{children}</main>
+            {(await isDraftMode()) && <ExitPreviewButton />}
           <Footer className="sticky bottom-0" />
         </body>
       </html>

@@ -27,7 +27,22 @@ export type PageQueryProps = {
   content?: SectionProps['sections'];
 };
 
-export const pageQuery = groq`*[_type == 'page' && language == $language && (!slug.current == $slug || !defined(slug))][0]{
+
+/**
+ * Page query
+ * @description Query to get a page by slug and language
+ * @param slug - The slug of the page
+ * @param language - The language of the page
+ * @param parentSlug - The slug of the parent page
+ * @param grandParentSlug - The slug of the grandparent page
+ * @returns The page
+ */
+export const pageQuery = groq`*[language == $language &&
+     _type in ["page"] &&
+    slug.current == $slug 
+    && ((!defined(parent._ref) && !defined($parentSlug) ) || parent->slug.current == $parentSlug) && 
+  ((!defined(parent->parent._ref) && !defined($grandParentSlug)) || parent->parent->slug.current == $grandParentSlug)
+  ][0]{
     ...,
     language,
     hero{

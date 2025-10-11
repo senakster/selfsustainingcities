@@ -25,15 +25,6 @@ export const structure: StructureResolver = (S, { documentStore }) =>
                     .id(singletonIds[lang.id as keyof typeof singletonIds].frontpage),
 
                   pageReferenceTree(S, documentStore, lang.id),
-                  // S.listItem()
-                  //   .title('Pages')
-                  //   .child(
-                  //     S.documentList()
-                  //       .title(`All Pages`)
-                  //       .apiVersion(`v${apiVersion}`)
-                  //       .filter(groq`_type in ["page"] && language == $lang && (!defined(parent))`)
-                  //       .params({ lang: lang.id }),
-                  //   ),
                   // S.documentListItem()
                   //   .title('Settings')
                   //   .schemaType('settings')
