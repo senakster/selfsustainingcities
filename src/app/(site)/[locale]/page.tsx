@@ -27,7 +27,7 @@ export async function generateMetadata ({params}: {params: Promise<{locale: stri
   const { title, slug, seo } = page;
  ;
   return {
-    title: `${title} ${slug.filter(Boolean).length > 0 ? '| self-sustaining cities' : ''}`,
+    title: `${title} ${[slug].flat(1)?.filter(Boolean).length > 0 ? '| self-sustaining cities' : ''}`,
     description: seo?.description || title,
     openGraph: {
       title: title,

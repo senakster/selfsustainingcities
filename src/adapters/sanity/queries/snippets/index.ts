@@ -1,0 +1,5 @@
+export { flexibleRefsSnippet } from './flexibleRefs.snippet'
+export { imageSnippet }  from './image.snippet'
+export { parentSlugSnippet }  from './path.snippet'
+export { portableTextSnippet }  from './portabletext.snippet'
+export { referencePathSnippet } from './referencePaths.snippet'

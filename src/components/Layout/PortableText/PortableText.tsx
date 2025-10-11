@@ -1,6 +1,9 @@
 import Link from '@/components/Atoms/AFlexibleLink/AFlexibleLink'
+import AImage from '@/components/Atoms/AImage/AImage'
+import { ImageObject } from '@/components/Atoms/AImage/AImage.types'
 import { PortableText, PortableTextMarkComponentProps, PortableTextReactComponents } from '@portabletext/react'
 import type { PortableTextMarkDefinition } from '@portabletext/types'
+
 // import BaseImage from './BaseImage'
 // import { TBaseImage } from '@/sanity/schemas/fields/baseImage/baseImage.props'
 // import { tap } from 'rxjs/operators';
@@ -57,23 +60,23 @@ const components: Partial<PortableTextReactComponents> = {
     ),
   },
   types: {
-    // baseImage: ({ value }: { value: TBaseImage }) => {
-    //   // console.log(value)
-    //   // const value
-    //   return (
-    //     <div className={`${baseStyle}`}>
-    //       <BaseImage
-    //         imageObj={value}
-    //         width={800}
-    //         aspectRatio={'as-is'} // "as-is" will render original image size
-    //         // aspectRatioDesktop={16 / 9}
-    //         sizes={'(max-width: 720px) 100vw, 720px'}
-    //         className='rounded-3xl'
-    //         priority={true}
-    //       />
-    //     </div>
-    //   )
-    // },
+    baseImage: ({ value }: { value: ImageObject }) => {
+      if (!value?.url) return <p>{JSON.stringify(value)}</p>
+      return (
+        <div className={`${baseStyle}`}>
+          <AImage
+            imageObj={value}
+            width={800}
+
+            aspectRatio={'as-is'} // "as-is" will render original image size
+            // aspectRatioDesktop={16 / 9}
+            sizes={'(max-width: 720px) 100vw, 720px'}
+            className='rounded-3xl'
+            priority={true}
+          />
+        </div>
+      )
+    },
   },
 }
 

@@ -1,5 +1,5 @@
 import { groq } from "next-sanity";
-import { pathSnippet } from "./path.snippet";
+import { parentSlugSnippet, portableTextSnippet } from "./snippets";
 import { SectionProps } from "@/components/Layout/SectionResolver/SectionsResolver";
 import { PortableTextMarkDefinition } from "@portabletext/types";
 import { schema } from "@/sanity/schemaTypes";
@@ -25,18 +25,22 @@ export type PageQueryProps = {
   };
   content?: SectionProps['sections'];
 };
-export const pageQuery = groq`
-*[_type == 'page' && language == $language && (!slug.current == $slug || !defined(slug))][0]{
-    ...,
 
+export const pageQuery = groq`*[_type == 'page' && language == $language && (!slug.current == $slug || !defined(slug))][0]{
+    ...,
     hero{
-      headline,
-      "leadText": leadText.text,
-      image{
+     headline,
+    "leadText": leadText.text[]{
+       ...,
+         markDefs[] {
+          ...,
+          _type == "link" => {...},
+        },
+       _type == 'baseImage' => {
         ...,
         asset->
       }
-    },
-    "slug": ${pathSnippet},
+    }
+  }
 }
-`;
+`

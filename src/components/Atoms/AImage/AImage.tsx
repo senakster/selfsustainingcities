@@ -17,7 +17,7 @@ export default function AImage (props: AImageProps ) {
     if (!imageObj?.asset) return
 
     const common = { width, sizes, alt: imageObj.alt }
-    const r = aspectRatio === 'as-is' ? imageObj.asset.metadata.dimensions.aspectRatio : aspectRatio
+    const r = aspectRatio === 'as-is' ? imageObj.asset?.metadata?.dimensions?.aspectRatio || 16/9 : aspectRatio
     const height = Math.round(width / r)
 
     return (
@@ -27,8 +27,8 @@ export default function AImage (props: AImageProps ) {
           className={cn('w-full', className)}
           src={getSanityImageSrc(imageObj, width, height)}
           height={height}
-          placeholder='blur'
-          blurDataURL={imageObj.asset.metadata.lqip}
+          placeholder={imageObj?.asset?.metadata?.lqip ? 'blur' : undefined}
+          blurDataURL={imageObj?.asset?.metadata?.lqip || undefined}
           quality={quality}
           priority={priority}
           {...common}
