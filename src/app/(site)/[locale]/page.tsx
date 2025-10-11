@@ -1,4 +1,4 @@
-import { client } from "@/sanity/lib/client";
+import { sanityClient } from "@/sanity/lib/client";
 import {
   pageQuery,
   type PageQueryProps,
@@ -13,7 +13,7 @@ type HomeProps = {
 };
 
 export async function generateMetadata ({params}: {params: Promise<{locale: string}>}) {
-  const page = await client.fetch<PageQueryProps>(pageQuery, { slug: [], language: (await params).locale || locales[0] }, { cache: "no-store" });
+  const page = await sanityClient<PageQueryProps>({ query: pageQuery, params: { slug: [], language: (await params).locale || locales[0] } });
   if (!page) {
     return {
       title: 'Home',
@@ -37,7 +37,7 @@ export async function generateMetadata ({params}: {params: Promise<{locale: stri
 export default async function Home(props: HomeProps) {
   const { params: _params } = props;
   const params = await _params;
-  const page = await client.fetch<PageQueryProps>(pageQuery, { slug: [], language: params.locale || locales[0] });
+  const page = await sanityClient<PageQueryProps>({ query: pageQuery, params: { slug: [], language: params.locale || locales[0] } });
   if (!page) {
     notFound();
   }

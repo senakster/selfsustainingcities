@@ -1,9 +1,9 @@
-import { pageQuery } from "@/adapters/sanity/queries/page.query";
-import { client } from "@/sanity/lib/client";
+import { pageQuery, PageQueryProps } from "@/adapters/sanity/queries/page.query";
+import { sanityClient } from "@/sanity/lib/client";
 
 export const sitemap = {
-  get: async () => {
-    const pages = await client.fetch(pageQuery, { slug: ["/"] });
+  get: async ({slug}: {slug: string[]}) => {
+    const pages = await sanityClient<PageQueryProps>({ query: pageQuery, params: { slug, language: "en" } });
     return pages;
   },
 };
