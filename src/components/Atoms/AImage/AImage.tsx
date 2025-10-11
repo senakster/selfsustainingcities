@@ -17,9 +17,23 @@ export default function AImage (props: AImageProps ) {
     if (!imageObj?.asset) return
 
     const common = { width, sizes, alt: imageObj.alt }
-    const r = aspectRatio === 'as-is' ? imageObj.asset?.metadata?.dimensions?.aspectRatio || 16/9 : aspectRatio
-    const height = Math.round(width / r)
+    // Determine the aspect ratio, considering "as-is" (natural image ratio)
+    const baseAspectRatio = aspectRatio === 'as-is'
+        ? imageObj.asset?.metadata?.dimensions?.aspectRatio
+        : aspectRatio
 
+    // Check for Sanity crop info
+    const crop = imageObj?.crop
+    let cropFactor = 1
+    if (crop) {
+        // crop is { top, bottom, left, right } as fractions (0-1)
+        // verticalCropFraction: portion of image remaining after crop
+        const verticalCropFraction = 1 - (crop.top || 0) - (crop.bottom || 0)
+        cropFactor = verticalCropFraction > 0 ? verticalCropFraction : 1
+    }
+
+    // Adjust height for crop, maintaining intended aspect ratio
+    const height = Math.round((width / baseAspectRatio) * cropFactor)
     return (
         <>
         {aspectRatioDesktop && <Source media='(min-width: 768px)' ratio={aspectRatioDesktop} />}

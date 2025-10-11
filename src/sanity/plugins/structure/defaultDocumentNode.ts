@@ -6,6 +6,7 @@ import { Iframe } from 'sanity-plugin-iframe-pane'
 import { referencePathQuery } from '../../lib/helpers'
 import { previewToken, apiVersion } from '../../env'
 
+
 export const defaultDocumentNode: DefaultDocumentNodeResolver = (S, { schemaType }) => {
   // Get client from structure-context
   const client = S.context.getClient({

@@ -1,18 +1,16 @@
 import { groq } from 'next-sanity'
 import { flexibleRefsSnippet } from './flexibleRefs.snippet'
+import { imageSnippet } from './image.snippet'
 
 /**
  * portableTextQuery
  * @description Resolves all types of portable texts. Use type TDocReferencePath
  */
 export const portableTextSnippet = groq`{
-  ...,
-  markDefs[] {
-    ...,
-    _type == "link" => ${flexibleRefsSnippet},
-  },
-  _type == "baseImage" => {
-    ...,
-    asset->
-  },
+       ...,
+        markDefs[] {
+          ...,
+          _type == "link" => ${flexibleRefsSnippet},
+        },
+       _type == 'baseImage' => ${imageSnippet}
 }`

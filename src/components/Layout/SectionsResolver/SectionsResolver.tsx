@@ -1,10 +1,16 @@
 import { locales } from '@/lib/i18n/locales'
 import { upperFirst } from '@/lib/utils/upperFirst'
 import { schema } from '@/sanity/schemaTypes' 
-import Textblock from '@/components/Layout/PortableText/PortableText'
+import TextBlock from '@/components/Atoms/ATextBlock/AtextBlock'
 
 const Sections = {
-  Textblock: Textblock
+  Textblock: TextBlock
+}
+
+export type ComponentProps = {
+  data?: unknown
+  sectionIdx?: number
+  locale?: typeof locales[number]
 }
 export type SectionProps = {
   sections: {_type: typeof schema.types[number]['name'], _key: string
@@ -14,6 +20,9 @@ export type SectionProps = {
 }
 
 export default function SectionsResolver({ sections, locale }: SectionProps) {
+  // return (<div>
+  //   {JSON.stringify(sections.map(section => resolveSections(section)))}
+  //   </div>)
   return (
     <>
       {sections.map((section, idx) => {

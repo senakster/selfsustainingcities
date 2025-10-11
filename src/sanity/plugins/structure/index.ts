@@ -1,30 +1,30 @@
 import type { StructureResolver } from 'sanity/structure'
 import { DocumentsIcon, HomeIcon, CogIcon } from '@sanity/icons'
 
-import { apiVersion } from '../../lib/sanity.env'
 import pageReferenceTree from './pageReferenceTreei18Lang'
-import { supportedLanguages, languageIcons, singletonIds } from 'i18config'
+import { supportedLanguages } from '@/lib/i18n/locales'
+import { singletonIds, LanguageIcons } from '@/lib/i18n/settings'
 
 export const structure: StructureResolver = (S, { documentStore }) =>
   S.list()
     .title('Base')
     .items([
       ...supportedLanguages.map(
-        (lang) =>
+        (lang: typeof supportedLanguages[number]) =>
           S.listItem()
             .title(lang.title)
-            .icon(languageIcons[lang.id])
+            .icon(LanguageIcons[lang.id as keyof typeof LanguageIcons])
             .child(
               S.list()
                 .title(`Content ${lang.title}`)
                 .items([
                   S.documentListItem()
                     .title('Frontpage')
-                    .schemaType('frontpage')
+                    .schemaType('page')
                     .icon(HomeIcon)
-                    .id(singletonIds[lang.id].frontpage),
+                    .id(singletonIds[lang.id as keyof typeof singletonIds].frontpage),
 
-                  pageReferenceTree(S, documentStore, lang.id),
+                  // pageReferenceTree(S, documentStore, lang.id),
                   // S.listItem()
                   //   .title('Pages')
                   //   .child(
@@ -34,11 +34,11 @@ export const structure: StructureResolver = (S, { documentStore }) =>
                   //       .filter('_type in ["landingpage","page","toolspage"] && language == $lang')
                   //       .params({ lang: lang.id }),
                   //   ),
-                  S.documentListItem()
-                    .title('Settings')
-                    .schemaType('settings')
-                    .icon(CogIcon)
-                    .id(singletonIds[lang.id].settings),
+                  // S.documentListItem()
+                  //   .title('Settings')
+                  //   .schemaType('settings')
+                  //   .icon(CogIcon)
+                  //   .id(singletonIds[lang.id].settings),
                 ]),
             ),
         /** Mixed documents view */

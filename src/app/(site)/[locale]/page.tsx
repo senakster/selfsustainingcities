@@ -5,11 +5,7 @@ import {
 } from "@/adapters/sanity/queries/page.query";
 import { notFound } from "next/navigation";
 import {locales } from '@/lib/i18n/locales'
-// import SectionsResolver from "@/components/Layout/SectionResolver/SectionsResolver";
-// import PortableTextResolver from "@/components/Layout/PortableText/PortableText";
-// import { PortableTextMarkDefinition } from "@portabletext/types";
-// import Container from "@/components/Layout/Container/Container";
-// import AHeading from "@/components/Atoms/AHeading/Aheading";
+import SectionsResolver from "@/components/Layout/SectionsResolver/SectionsResolver";
 import Hero from '@/components/Layout/Hero/Hero';
 
 type HomeProps = {
@@ -17,14 +13,14 @@ type HomeProps = {
 };
 
 export async function generateMetadata ({params}: {params: Promise<{locale: string}>}) {
-  const page = await client.fetch<PageQueryProps>(pageQuery, { slug: [], language: (await params).locale || locales[0] });
+  const page = await client.fetch<PageQueryProps>(pageQuery, { slug: [], language: (await params).locale || locales[0] }, { cache: "no-store" });
   if (!page) {
     return {
       title: 'Home',
       description: 'Home',
     }
   }
-  const { title, slug, seo } = page;
+  const { title, slug, seo} = page;
  ;
   return {
     title: `${title} ${[slug].flat(1)?.filter(Boolean).length > 0 ? '| self-sustaining cities' : ''}`,
@@ -46,12 +42,11 @@ export default async function Home(props: HomeProps) {
     notFound();
   }
 
-  const { title, hero } = page;
+  const { title, hero, content, slug, language } = page;
   return (
     <div className="py-12">
       <Hero {...hero} />
-        {/* <SectionsResolver sections={[{_type: 'textblock', _key: 'textblock', text: hero.byline.text as PortableTextMarkDefinition}]} /> */}
-        
+      <SectionsResolver sections={content || []} locale={language as typeof locales[number]} />
     </div>
   );
 }

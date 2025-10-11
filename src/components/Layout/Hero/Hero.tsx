@@ -4,7 +4,7 @@ import AHeading from "@/components/Atoms/AHeading/Aheading"
 import PortableText from '@/components/Layout/PortableText/PortableText'
 import type {ImageObject}  from '@/components/Atoms/AImage/AImage.types'
 import AImage from '@/components/Atoms/AImage/AImage'
-import Container from "../Container/Container"
+import Container from "@/components/Layout/Container/Container"
 export type HeroProps = {
     headline?: string
     leadText?: PortableTextMarkDefinition

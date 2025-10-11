@@ -61,17 +61,16 @@ const components: Partial<PortableTextReactComponents> = {
   },
   types: {
     baseImage: ({ value }: { value: ImageObject }) => {
-      if (!value?.url) return <p>{JSON.stringify(value)}</p>
+      if (!value?.asset) return <p>{JSON.stringify(value)}</p>
       return (
         <div className={`${baseStyle}`}>
           <AImage
             imageObj={value}
             width={800}
-
             aspectRatio={'as-is'} // "as-is" will render original image size
             // aspectRatioDesktop={16 / 9}
             sizes={'(max-width: 720px) 100vw, 720px'}
-            className='rounded-3xl'
+            className='rounded-3xl object-contain'
             priority={true}
           />
         </div>
