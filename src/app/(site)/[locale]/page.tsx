@@ -9,6 +9,8 @@ type HomeProps = {
   params: Promise<{ locale: string }>;
 };
 
+export const dynamic = 'force-static';
+export const dynamicParams = true;
 export const revalidate = 10; // seconds
 
 export async function generateMetadata ({params}: {params: Promise<{locale: string}>}) {
@@ -47,7 +49,6 @@ export default async function Home(props: HomeProps) {
     <div className="py-12">
       <Hero {...hero} />
       <SectionsResolver sections={content || []} locale={language as typeof locales[number]} />
-      {isPreview ? <p>preview</p> : null}
     </div>
   );
 }
