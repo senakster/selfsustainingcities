@@ -13,6 +13,10 @@ type LocaleLayoutProps = {
 
 
 export async function generateStaticParams() {
+  const isPreview = await isDraftMode()
+  if (isPreview) {
+    return []
+  }
   return locales.map((locale) => ({ locale }))
 }
 

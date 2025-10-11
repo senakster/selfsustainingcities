@@ -4,6 +4,7 @@ import SectionsResolver from "@/components/Layout/SectionsResolver/SectionsResol
 import Hero from '@/components/Layout/Hero/Hero';
 import { getPage } from "@/serverfunctions/load-page";
 import isDraftMode from "@/sanity/lib/helpers/isDraftMode"
+import { PageQueryProps } from "@/adapters/sanity/queries/page.query";
 
 type HomeProps = {
   params: Promise<{ locale: string }>;
@@ -11,10 +12,12 @@ type HomeProps = {
 
 export const dynamic = 'force-static';
 export const dynamicParams = true;
-export const revalidate = 10; // seconds
+export const revalidate = 3600; // 1 hour
 
 export async function generateMetadata ({params}: {params: Promise<{locale: string}>}) {
-  const page = await getPage({ slug: [], language: (await params).locale || locales[0] });
+  const isPreview = await isDraftMode()
+  try {
+  const page = await getPage({ slug: [], language: (await params).locale || locales[0], isPreview });
   if (!page) {
     return {
       title: 'Home',
@@ -33,22 +36,33 @@ export async function generateMetadata ({params}: {params: Promise<{locale: stri
       url: seo?.canonical || '',
     },
   }
+  } catch (error) {
+    console.error('error', error)
+    return {
+      title: 'Home',
+      description: 'Home',
+    }
+  }
 }
 
 export default async function Home(props: HomeProps) {
   const { params: _params } = props;
   const isPreview = await isDraftMode()
   const params = await _params;
-  const page = await getPage({ slug: [], language: params.locale || locales[0], isPreview });
-  console.log('page', page)
-  if (!page) {
-    notFound();
+  let page: PageQueryProps | null = null;
+  try {
+  page = await getPage({ slug: [], language: (await params).locale || locales[0], isPreview });
+  } catch (error) {
+    console.error('error', error)
+    notFound()
   }
-
+  if  (!page) {
+    notFound()
+  }
   const { hero, content, language } = page;
   return (
     <div className="py-12">
-      <Hero {...hero} />
+      <Hero headline={hero?.headline} leadText={hero?.leadText} image={hero?.image} />
       <SectionsResolver sections={content || []} locale={language as typeof locales[number]} />
     </div>
   );
