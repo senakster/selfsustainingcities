@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: Promise<PageProps> }) {
   const { slug, locale } = await params;
   const isPreview = await isDraftMode()
   const page = await getPage({ slug, language: locale, isPreview });
-  
+  console.log('page', page);
   if (!page) {
     notFound();
   }

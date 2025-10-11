@@ -40,6 +40,7 @@ export default async function Home(props: HomeProps) {
   const isPreview = await isDraftMode()
   const params = await _params;
   const page = await getPage({ slug: [], language: params.locale || locales[0], isPreview });
+  console.log('page', page)
   if (!page) {
     notFound();
   }
