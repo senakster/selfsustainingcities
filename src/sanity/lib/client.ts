@@ -29,13 +29,13 @@ export async function sanityClient<T>({
     ...(isPreview
       ? {
           token,
-          perspective: 'drafts',
+          perspective: 'raw',
           useCdn: false,
           cache: 'no-store',
         }
       : {
           token,
-          perspective: 'published',
+          perspective: 'raw',
           useCdn: true,
           cache: 'force-cache',
         }),
