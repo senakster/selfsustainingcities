@@ -8,7 +8,7 @@ import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { documentInternationalization } from "@sanity/document-internationalization";
-
+import { CogIcon, DocumentIcon } from '@sanity/icons'
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from "./src/sanity/env";
@@ -23,7 +23,31 @@ export default defineConfig({
   projectId,
   dataset,
   // Add and edit the content schema in the './sanity/schemaTypes' folder
-  schema,
+  schema: {
+    ...schema, 
+    templates: (templates) => [
+      ...templates
+        .map((template) => ({ ...template })),
+      ...supportedLanguages
+        .map((lang) => [
+          {
+            icon: DocumentIcon,
+            id: `page-${lang.id}-parent`,
+            title: `Page parent (${lang.title})`,
+            schemaType: 'page',
+            parameters: [{ name: 'parentId', type: 'string' }],
+            value: (params: { parentId: string }) => ({
+              parent: {
+                _type: 'reference',
+                _ref: params.parentId,
+              },
+              language: lang.id,
+            }),
+          },
+        ])
+        .flat(),
+    ],
+  },
   plugins: [
     structureTool({ defaultDocumentNode, structure }),
     // Vision is for querying with GROQ from inside the Studio

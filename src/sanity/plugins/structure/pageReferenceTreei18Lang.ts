@@ -4,7 +4,7 @@ import { groq } from 'next-sanity'
 import { map, tap } from 'rxjs/operators'
 import { apiVersion } from '../../env'
 import { DocumentIcon, SchemaIcon } from '@sanity/icons'
-import { locales } from '../../../lib/i18n/locales'
+import { supportedLanguages } from '@/lib/i18n/locales'
 
 type TPageReferenceTree = Array<{
   _id: string
@@ -25,8 +25,9 @@ type TPageReferenceTree = Array<{
 export default function pageReferenceTree(
   S: StructureBuilder,
   documentStore: DocumentStore,
-  lang: typeof locales[number] = 'en',
+  lang: typeof supportedLanguages[number]['id'] = 'en',
 ) {
+  console.log(lang)
   const query = groq`
   *[_type in ["page"] && language == $lang && !(_id in path("drafts.**")) && !defined(parent)] | order(lower(title) asc) [] {
     _id,
@@ -71,7 +72,7 @@ export default function pageReferenceTree(
 function buildTree(
   parents: TPageReferenceTree,
   S: StructureBuilder,
-  lang: typeof locales[number],
+  lang: typeof supportedLanguages[number]['id'],
 ): (ListItemBuilder | ListItem | Divider)[] {
   return parents.sort().map((parent) => {
     const { _id, _type, title, children } = parent
