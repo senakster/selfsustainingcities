@@ -6,7 +6,6 @@ const secret = process.env.SANITY_REVALIDATE_SECRET;
 export async function POST(request: NextRequest) {
   // Parse the request body
   const body = await request.json();
-  console.log(body);
   if (!body.secret) {
     return new Response(JSON.stringify({ error: "Secret is required" }), {
       status: 400,

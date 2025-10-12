@@ -1,7 +1,6 @@
 import { SlugValidationContext } from 'sanity'
 export async function isUniqueAcrossLanguage(slug: string, context: SlugValidationContext) {
   const { document, getClient } = context
-  console.log(document)
   const client = getClient({
     apiVersion: `v${process.env.NEXT_PUBLIC_SANITY_API_VERSION}` || 'v2025-02-19',
   })

@@ -12,7 +12,6 @@ export default defineType({
     },
     validation: (SlugRule) =>
       SlugRule.custom((self) => {
-        console.log({self})
         if (!self || !self?.current) return 'Slug is required'
         const slug = self.current
         if (toUrlSafe(slug) != slug) return 'Slug is not URL-safe'

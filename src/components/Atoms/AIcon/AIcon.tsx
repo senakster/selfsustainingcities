@@ -7,7 +7,6 @@ const svgStringToB64 = (svgString: string) => {
   return `data:image/svg+xml;base64,${Buffer.from(svgString).toString('base64')}`;
 }
 export default function AIcon({img, className, alt, color}: {img: ImageProps | string, className?: string, alt?: string, color?: string}) {
-  console.log(img)
   if(!img) return null
   const { className: imgClassName, alt: imgAlt,...rest } = typeof img === 'object' ? img : {};
   const iconColor = color || "var(--color-foreground)";

@@ -11,6 +11,8 @@ type TSanityFetchProps = {
   params?: object
   tags?: string[]
 }
+
+/** viewer token, hardcoded for now.  */
 const token = 'skloiPfF4e31lklWQTjBOpjzkk4w1K8RsFSEOsSQ4ZPEE4HS5dg7K6iEfmzgS2qikLjdevbGUhYEpP24VtSjWWcfYpFtkWK8oC21tZa4X5oR862Gzqa0q02BVg4P3HkRvWOnYV0FI9LQRzf2PNLu1iQDWPZMMPpze4bJOiMWYozZeW9hGt2v'
 
 export async function sanityClient<T>({
@@ -19,7 +21,6 @@ export async function sanityClient<T>({
   params = {},
   tags = [],
 }: TSanityFetchProps): Promise<T> { 
-  console.log({token, dataset, apiVersion, isPreview })    
     const response = createClient({
       projectId,
       dataset,
@@ -43,7 +44,6 @@ export async function sanityClient<T>({
       tags,
     },
   })
-  console.log('response', response.then(console.log))
   return response
 }
 

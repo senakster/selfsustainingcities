@@ -27,7 +27,6 @@ export default function pageReferenceTree(
   documentStore: DocumentStore,
   lang: typeof supportedLanguages[number]['id'] = 'en',
 ) {
-  console.log(lang)
   const query = groq`
   *[_type in ["page"] && language == $lang && !(_id in path("drafts.**")) && !defined(parent)] | order(lower(title) asc) [] {
     _id,

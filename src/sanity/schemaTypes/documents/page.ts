@@ -18,15 +18,11 @@ export default defineType({
       group: "settings",
     }),
     defineField({
-      type: 'hero',
-      name: 'hero',
-      group: 'content',
-    }),
-    defineField({
       name: "language",
       type: "string",
       readOnly: true,
       hidden: true,
+      group: 'settings',
     }),
     defineField({
       name: 'slug',
@@ -66,6 +62,11 @@ export default defineType({
       },
     }),
     defineField({
+      type: 'hero',
+      name: 'hero',
+      group: 'content',
+    }),
+    defineField({
       title: "Content",
       name: "content",
       type: "contentblocks",
@@ -75,6 +76,11 @@ export default defineType({
       name: 'seo',
       type: 'seo',
       group: 'seo',
+      options: {
+        collapsible: true,
+        collapsed: true, // Starts expanded
+        columns: 1
+      },
     })
   ],
   preview: {

@@ -22,7 +22,6 @@ export async function generateStaticParams({ params }: { params: { locale: strin
 
 export default async function Page({ params }: { params: Promise<PageProps> }) {
   const { slug, locale } = await params;
-  console.log('locale', locale, slug)
   const isPreview = await isDraftMode()
   let page: PageQueryProps | null = null;
   try {

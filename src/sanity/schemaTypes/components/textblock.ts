@@ -9,4 +9,12 @@ export default defineType({
       type: "portabletext",
     }),
   ],
+  preview: {
+    select: {
+      title: "text.0.children[0].text",
+    },
+    prepare(selection) {
+      return { title: selection.title };
+    },
+  },
 });

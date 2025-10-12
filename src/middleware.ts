@@ -20,7 +20,6 @@ export default function middleware(request: NextRequest) {
 
   /** order is important */
 
-  // console.log({isLocale, firstPath})
   if (firstPath === 'en') {
     const newPath = '/' + pathname.split("/").slice(2).join("/");
     return NextResponse.redirect(new URL(`${newPath}`, request.url));
