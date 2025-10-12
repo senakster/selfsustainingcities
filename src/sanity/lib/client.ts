@@ -11,7 +11,7 @@ type TSanityFetchProps = {
   params?: object
   tags?: string[]
 }
-const token = process.env.SANITY_STUDIO_EDITOR_TOKEN;
+const token = 'skloiPfF4e31lklWQTjBOpjzkk4w1K8RsFSEOsSQ4ZPEE4HS5dg7K6iEfmzgS2qikLjdevbGUhYEpP24VtSjWWcfYpFtkWK8oC21tZa4X5oR862Gzqa0q02BVg4P3HkRvWOnYV0FI9LQRzf2PNLu1iQDWPZMMPpze4bJOiMWYozZeW9hGt2v'
 
 export async function sanityClient<T>({
   isPreview,
