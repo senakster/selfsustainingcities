@@ -8,8 +8,8 @@ export const referencePathSnippet = groq`
   select(
     _type in ['page'] && defined(parent->parent->slug) && defined(language) => "/" + language + "/" + parent->parent->slug.current + "/" + parent->slug.current + "/" + slug.current,
     _type in ['page'] && defined(parent->slug) && defined(language) => "/" + language + "/" + parent->slug.current + "/" + slug.current,
-    _type in ['page'] && defined(language) => "/" + language + "/" + slug.current,
-    defined(language) => "/" + language + "/",
+    _type in ['page'] && defined(language) && defined(slug) => "/" + language + "/" + slug.current,
+    defined(language) => "/" + language,
     "/"
   )
 `

@@ -9,7 +9,9 @@ export default function ATextblock ({data, ...rest}: Props) {
     const { text } = data
     return (
         <Container>
-            <PortableText text={text} {...rest} />
+            <div className='max-w-5xl mx-auto'>
+                <PortableText text={text} {...rest} />
+            </div>
         </Container>
     )
 }

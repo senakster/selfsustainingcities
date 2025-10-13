@@ -9,6 +9,8 @@ type AHeadingProps = {
 export default function AHeading(props: AHeadingProps) {
   const { tag: Tag, children, className, ...rest } = props;
 
+
+  const commonClassNames = 'font-serif'
   const classNameByTag = (): string => {
     switch (Tag) {
       case 'h1':
@@ -27,7 +29,7 @@ export default function AHeading(props: AHeadingProps) {
   }
 
   return (
-    <Tag className={cn(classNameByTag(), className)} {...rest}>
+    <Tag className={cn(commonClassNames, classNameByTag(), className)} {...rest}>
       {children}
     </Tag>
   );
