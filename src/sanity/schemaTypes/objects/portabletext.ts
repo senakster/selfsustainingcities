@@ -1,5 +1,5 @@
 import { defineField, defineType, defineArrayMember } from "sanity";
-import { EarthGlobeIcon } from "@sanity/icons";
+import { EarthGlobeIcon, LinkIcon } from "@sanity/icons";
 
 export default defineType({
   name: "portabletext",
@@ -23,10 +23,10 @@ export default defineType({
         ],
         annotations: [
           defineField({
-            name: 'linkExternal',
+            name: 'link',
             type: 'object',
-            title: 'External link',
-            icon: EarthGlobeIcon,
+            title: 'Link',
+            icon: LinkIcon,
             fields: [
               defineField({
                 name: 'href',

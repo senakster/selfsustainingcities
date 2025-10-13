@@ -4,7 +4,8 @@ import { cn } from "@/lib/utils/cn";
 import Link from "@/components/Atoms/AFlexibleLink/AFlexibleLink";
 import Container from '@/components/Layout/Container/Container'
 import ALogo from "@/components/Atoms/ALogo/ALogo";
-
+import { sitemaps } from "@/lib/utils/getSitemap";
+import { SitemapItem } from "@/adapters/sanity/queries/sitemap.query";
 type HeaderProps = {
   className: string;
   locale: typeof locales[number];
@@ -23,6 +24,11 @@ export default function Header(props: HeaderProps) {
         </Link>
       </div>
       <ul className="w-min flex gap-2 justify-between">
+        {sitemaps[locale]?.map(
+          (item: SitemapItem) => <li key={item.url}>
+          <Link href={item.url}>{item.url.replace(`/${locale}`, '')}</Link>
+        </li>
+        )}
         {/* <li>
           <Link href={"/about"} locale={locale}>About</Link>
         </li>

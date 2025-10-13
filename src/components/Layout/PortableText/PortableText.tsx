@@ -1,3 +1,4 @@
+import AFlexibleLink from '@/components/Atoms/AFlexibleLink/AFlexibleLink'
 import Link from '@/components/Atoms/AFlexibleLink/AFlexibleLink'
 import AImage from '@/components/Atoms/AImage/AImage'
 import { ImageObject } from '@/components/Atoms/AImage/AImage.types'
@@ -37,6 +38,12 @@ const components: Partial<PortableTextReactComponents> = {
   marks: {
     linkInternal: LinkInternal,
     linkExternal: LinkExternal,
+    link: (props: PortableTextMarkComponentProps<{ href: string, text: string, _type: 'flexibleLink' }>) => {
+      // const _href = props.value?._type === 'flexibleRefs' ? props.value?.href.href : props.value?.href ?? ''
+      return (
+        `LINK ${props.text} LINK`
+      // <AFlexibleLink href={_href ?? ''}>{props.children}</AFlexibleLink>
+    )},
     em: (m) => <span className='italic'>{m.children}</span>,
     strong: (m) => {
       return <span className='font-bold'>{m.children}</span>
@@ -80,6 +87,7 @@ const components: Partial<PortableTextReactComponents> = {
 }
 
 function LinkInternal(props: PortableTextMarkComponentProps<{ path: string, text: string, _type: 'linkInternal' }>) {
+  console.log('internal', props)
   // PortableTextMarkComponentProps has: children, value, etc.
   return (
     <Link className='underline' href={props?.value?.path ?? ''} prefetch={false}>
@@ -89,6 +97,7 @@ function LinkInternal(props: PortableTextMarkComponentProps<{ path: string, text
 }
 
 function LinkExternal(props: PortableTextMarkComponentProps<{ href: string, text: string, _type: 'linkExternal' }>) {
+  console.log('external', props)
   return (
     <a className='underline' target={'_blank'} href={props?.value?.href ?? ''}>
       {props?.children}
