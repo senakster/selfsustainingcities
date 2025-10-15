@@ -45,6 +45,7 @@ export default function AImage (props: AImageProps ) {
           blurDataURL={imageObj?.asset?.metadata?.lqip || undefined}
           quality={quality}
           priority={priority}
+          title={imageObj.alt || ''}
           {...common}
           alt={imageObj.alt || ''}
         />
