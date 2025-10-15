@@ -35,8 +35,8 @@ export default function AImage (props: AImageProps ) {
     // Adjust height for crop, maintaining intended aspect ratio
     const height = Math.round((width / baseAspectRatio) * cropFactor)
     return (
-        <>
-        {aspectRatioDesktop && <Source media='(min-width: 768px)' ratio={aspectRatioDesktop} />}
+        <picture>
+        {aspectRatioDesktop && <Source media="(width >= 768px)" ratio={aspectRatioDesktop} />}
         <Image
           className={cn('w-full', className)}
           src={getSanityImageSrc(imageObj, width, height)}
@@ -49,7 +49,7 @@ export default function AImage (props: AImageProps ) {
           {...common}
           alt={imageObj.alt || ''}
         />
-      </>
+      </picture>
     )
   
   /**
