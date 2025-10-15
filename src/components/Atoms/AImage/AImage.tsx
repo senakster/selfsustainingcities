@@ -38,7 +38,7 @@ export default function AImage (props: AImageProps ) {
         <picture>
         {aspectRatioDesktop && <Source media="(width >= 768px)" ratio={aspectRatioDesktop} />}
         <Image
-          className={cn('w-full', className)}
+        className={cn('w-full', className)}
           src={getSanityImageSrc(imageObj, width, height)}
           height={height}
           placeholder={imageObj?.asset?.metadata?.lqip ? 'blur' : undefined}

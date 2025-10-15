@@ -29,7 +29,7 @@ const components: Partial<PortableTextReactComponents> = {
       <h4 className={`text-base lg:text-heading-xs font-bold mt-2 mb-1`}>{children}</h4>
     ),
     normal: ({ children }) => <p className={`${baseStyle}`}>{children}</p>,
-    blockquote: ({ children }) => (
+    blockquote: ({ children }) => ( 
       <blockquote className={`${baseStyle} italic before:content-['“'] after:content-['”']`}>
         {children}
       </blockquote>

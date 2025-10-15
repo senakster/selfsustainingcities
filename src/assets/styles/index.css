@@ -1,0 +1,28 @@
+.animate-appear {
+  animation-timeline: view(100px 50px);
+  animation-name: appear;
+  animation-fill-mode: both;
+  animation-duration: .5ms; /* Firefox requires this to apply the animation */
+}
+
+.has-appear {
+    & > *  {
+        animation-timeline: view(100px 50px);
+        animation-name: appear;
+        animation-fill-mode: both;
+        animation-duration: .5ms;  /* Firefox requires this to apply the animation */
+    }
+    
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    /* transform: translateY(50%); */
+  }
+
+  to {
+    opacity: 1;
+    /* transform: translateY(0%); */
+  }
+}

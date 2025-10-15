@@ -1,12 +1,13 @@
+@import "../assets/styles/index.css";
 @import "tailwindcss";
 
 :root {
   --background: #F8F7F2;
-  --foreground: #000000;
+  --foreground: #2E2E2E;
   --primary: #4C6041;
   --secondary: #DAD2BC;
   --tertiary: #A8C66C;
-  --quaternary: #461A1A;
+  --quaternary: #2E2E2E;
 }
 
 @theme inline {

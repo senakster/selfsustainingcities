@@ -9,6 +9,7 @@ const Sections = {
 
 export type ComponentProps = {
   data?: unknown
+  className?: string
   sectionIdx?: number
   locale?: typeof locales[number]
 }
@@ -30,13 +31,13 @@ export default function SectionsResolver({ sections, locale }: SectionProps) {
         if (!Section) {
           return <div key={section._key}>Missing section: {upperFirst(section._type)}</div>
         }
-        return <Section data={section} sectionIdx={idx} key={section._key} locale={locale} />
+        return <Section className='' data={section} sectionIdx={idx} key={section._key} locale={locale} />
       })}
     </>
   )
 }
 
-type SectionsModule = Record<string, React.ComponentType<{ data: unknown; sectionIdx: number; locale?: typeof locales[number] }>> // TODO: fix this
+type SectionsModule = Record<string, React.ComponentType<{ data: unknown; className?: string; sectionIdx: number; locale?: typeof locales[number] }>> // TODO: fix this
 
 function resolveSections(section: SectionProps['sections'][number]) {
   const sectionName = upperFirst(section._type)

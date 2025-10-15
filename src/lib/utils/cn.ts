@@ -4,6 +4,7 @@ import { extendTailwindMerge } from 'tailwind-merge'
 export const twMerge = extendTailwindMerge({
     extend: {
         theme: {
+            animate: ['animate-appear'],
             color: ['theme-primary', 'theme-secondary', 'theme-tertiary', 'theme-quarternary'],
         },
     },
