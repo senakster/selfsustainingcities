@@ -50,15 +50,15 @@ export default defineConfig({
     ],
   },
   plugins: [
-    structureTool({ defaultDocumentNode, structure }),
-    // Vision is for querying with GROQ from inside the Studio
-    // https://www.sanity.io/docs/the-vision-plugin
-    visionTool({ defaultApiVersion: apiVersion }),
-    media(),
     documentInternationalization({
       // Required configuration
       supportedLanguages: supportedLanguages,
       schemaTypes: ["page"],
     }),
+    structureTool({ defaultDocumentNode, structure }),
+    // Vision is for querying with GROQ from inside the Studio
+    // https://www.sanity.io/docs/the-vision-plugin
+    media(),
+    visionTool({ defaultApiVersion: apiVersion }),
   ],
 });

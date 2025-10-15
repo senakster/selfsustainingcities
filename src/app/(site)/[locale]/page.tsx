@@ -61,7 +61,7 @@ export default async function Home(props: HomeProps) {
   }
   const { hero, content, language } = page;
   return (
-    <div className="py-12">
+    <div className="">
       <Hero headline={hero?.headline} leadText={hero?.leadText} image={hero?.image} />
       <SectionsResolver sections={content || []} locale={language as typeof locales[number]} />
     </div>

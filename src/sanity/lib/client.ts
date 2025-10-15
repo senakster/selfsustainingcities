@@ -38,7 +38,7 @@ export async function sanityClient<T>({
           token,
           perspective: 'published',
           useCdn: false,
-          cache: 'no-store',
+          cache: 'force-cache',
         }),
     next: {
       tags,

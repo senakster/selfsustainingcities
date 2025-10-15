@@ -40,7 +40,7 @@ export default async function LocaleLayout(props: LocaleLayoutProps) {
           <Header className={"sticky top-0"} locale={locale as typeof locales[number]} />
             <main className="">{children}</main>
             {(await isDraftMode()) && <ExitPreviewButton />}
-          <Footer className="sticky bottom-0" />
+          <Footer className="" />
         </body>
       </html>
     );

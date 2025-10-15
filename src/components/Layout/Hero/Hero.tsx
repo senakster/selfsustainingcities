@@ -15,14 +15,18 @@ export default function Hero (props: HeroProps) {
     const { headline, leadText, image, className} = props
     
     return (
-        <div className={cn(className)}>
-            <div className="hero-content flex flex-col gap-12">
-                <div className="fixed inset-0 -z-10 min-w-screen min-h-screen object-cover">
+        <div className={cn('z-10',className)}>
+            <div className="hero-content flex flex-col gap-12 relative py-12 min-h-[80vh] overflow-hidden  items-center justify-center">
+                <div className="absolute inset-0 -z-10 min-w-screen object-cover">
                     <AImage className="w-full h-full object-cover" imageObj={image} width={1920} aspectRatio={19/6}  priority/>   
-                    <div className="absolute inset-0 bg-(--background)/80" />
+                    <div className="absolute inset-0 bg-(--background)/70" />
                 </div>
-                <Container><AHeading tag="h1" className="text-center">{headline}</AHeading></Container>
-                <Container><PortableText text={leadText} /></Container>
+                <Container>
+                    <div className='flex flex-col gap-4 text-center'>
+                        <AHeading tag="h1" className="text-center">{headline}</AHeading>
+                        <PortableText text={leadText} />
+                  </div>
+                </Container>
             </div>
 
         </div>

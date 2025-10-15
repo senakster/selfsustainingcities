@@ -1,12 +1,13 @@
 import logo from '@/assets/ssclogo.png';
+import { cn } from '@/lib/utils/cn';
 
-export default function ALogo() {
+export default function ALogo({className, iconClassName}: {className?: string, iconClassName?: string}) {
   const maskUrl = logo.src;;
   
     return (
-      <div className="bg-(--color-background) w-10 h-10 rounded-full">
+      <div className={cn("bg-(--color-background) w-10 h-10 rounded-full", className)}>
         <div
-          className="w-10 h-10 bg-(--color-foreground)"
+          className={cn("w-10 h-10 bg-(--color-foreground)", iconClassName)}
           style={{
             WebkitMaskImage: `url(${maskUrl})`,
             maskImage: `url(${maskUrl})`,

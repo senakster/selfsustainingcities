@@ -14,13 +14,13 @@ export default function Header(props: HeaderProps) {
   const { className, locale, ...rest } = props;
   return (
     <header 
-      className={cn(`${className} sticky top-0 backdrop-blur-lg py-4 pb-10 mask-[linear-gradient(to_bottom,black_calc(100%-40px),transparent_100%)]`)}
+      className={cn(`${className} sticky bg-theme-secondary top-0 py-2 z-10`)}
       {...rest}
     >
-      <Container className={'grid grid-rows-1 grid-cols-[1fr_auto]'}>
+      <Container className={'grid grid-rows-1 grid-cols-[1fr_auto] items-center'}>
       <div>
-        <Link href="/" locale={locale}>
-        <ALogo />
+        <Link href="/" locale={locale} className='hover:none w-min inline-block'>
+          <ALogo className='bg-theme-secondary' iconClassName='bg-theme-quaternary' />
         </Link>
       </div>
       <ul className="w-min flex gap-2 justify-between">

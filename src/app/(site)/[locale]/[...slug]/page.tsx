@@ -36,9 +36,11 @@ export default async function Page({ params }: { params: Promise<PageProps> }) {
   const { hero, content, language } = page;
   
   return (
-    <div className="py-12">
+    <div className="">
       <Hero headline={hero?.headline} leadText={hero?.leadText} image={hero?.image} />
+      <div className="py-12">
       <SectionsResolver sections={content || []} locale={language as typeof locales[number]} />
+      </div>
     </div>
   );
 }
