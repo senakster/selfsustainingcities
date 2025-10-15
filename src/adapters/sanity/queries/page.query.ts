@@ -53,7 +53,7 @@ export const pageQuery = groq`*[language == $language &&
     "slug": ${parentSlugSnippet},
     content[]{
       ...,
-      _type == 'textBlock' => {
+      _type == 'textblock' => {
         text[]${portableTextSnippet}
       }
     }

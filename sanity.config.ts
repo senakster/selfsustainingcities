@@ -14,6 +14,7 @@ import { CogIcon, DocumentIcon } from '@sanity/icons'
 import { apiVersion, dataset, projectId } from "./src/sanity/env";
 import { schema } from "./src/sanity/schemaTypes";
 import { structure } from "./src/sanity/plugins/structure";
+import {media} from 'sanity-plugin-media'
 // import { structure } from "./src/sanity/structure";
 import { defaultDocumentNode } from "./src/sanity/plugins/structure/defaultDocumentNode";
 import { supportedLanguages } from "./src/lib/i18n/locales";
@@ -53,6 +54,7 @@ export default defineConfig({
     // Vision is for querying with GROQ from inside the Studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: apiVersion }),
+    media(),
     documentInternationalization({
       // Required configuration
       supportedLanguages: supportedLanguages,

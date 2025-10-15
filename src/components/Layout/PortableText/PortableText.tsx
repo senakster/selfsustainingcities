@@ -38,11 +38,10 @@ const components: Partial<PortableTextReactComponents> = {
   marks: {
     linkInternal: LinkInternal,
     linkExternal: LinkExternal,
-    link: (props: PortableTextMarkComponentProps<{ href: string, text: string, _type: 'flexibleLink' }>) => {
-      // const _href = props.value?._type === 'flexibleRefs' ? props.value?.href.href : props.value?.href ?? ''
+    link: (props) => {
+      console.log({props})
       return (
-        `LINK ${props.text} LINK`
-      // <AFlexibleLink href={_href ?? ''}>{props.children}</AFlexibleLink>
+      <AFlexibleLink href={props?.value?.href ?? ''}>{props.children}</AFlexibleLink>
     )},
     em: (m) => <span className='italic'>{m.children}</span>,
     strong: (m) => {
