@@ -17,7 +17,7 @@ export type TextImageProps = {
 export default function TextImage({ data }: { data: TextImageProps }) {
     const { text, image, link, imageAlignment } = data
     return (
-        <div className={cn('bg-theme-quaternary')}>
+        <div className={cn('bg-theme-quarternary text-background')}>
             <Container className='grid grid-cols-1 lg:grid-cols-2 grid-rows-2 lg:grid-rows-1 gap-4 relative px-0 lg:px-4'>
             <div className={cn("w-full", imageAlignment === 'left' ? 'order-1' : 'order-2')}>
              <AImage imageObj={image} width={800} aspectRatio={16 / 9} aspectRatioDesktop={1} sizes="(max-width: 768px) 50vw, 720px" priority />

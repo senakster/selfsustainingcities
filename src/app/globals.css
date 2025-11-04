@@ -7,7 +7,7 @@
   --primary: #4C6041;
   --secondary: #DAD2BC;
   --tertiary: #A8C66C;
-  --quaternary: #2E2E2E;
+  --quarternary: #2E2E2E;
 }
 
 @theme inline {
@@ -18,7 +18,7 @@
   --color-theme-primary: var(--primary);
   --color-theme-secondary: var(--secondary);
   --color-theme-tertiary: var(--tertiary);
-  --color-theme-quaternary: var(--quaternary);
+  --color-theme-quarternary: var(--quarternary);
 }
 
 /* @media (prefers-color-scheme: dark) {
