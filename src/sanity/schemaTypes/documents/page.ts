@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { CogIcon, DashboardIcon, SearchIcon } from '@sanity/icons'
+import { toUrlSafe, isUniqueAcrossLanguage} from '../../lib/helpers'
 import { groq } from 'next-sanity'
 
 
@@ -7,8 +8,8 @@ export default defineType({
   name: "page",
   type: "document",
   groups: [
-    { name: 'settings', icon: CogIcon },
-    { name: 'content', icon: DashboardIcon },
+    { name: 'settings', title: 'Settings', icon: CogIcon },
+    { name: 'content', title: 'Content', icon: DashboardIcon },
     { name: 'seo', title: 'SEO', icon: SearchIcon },
   ],
   fields: [
@@ -27,12 +28,26 @@ export default defineType({
     defineField({
       name: 'slug',
       type: 'slug',
+      description: 'Must only contain url-safe characters and no spaces. Should preferably be generated. Frontpage should be empty',
+      options: {
+        source: 'title',
+        slugify: toUrlSafe,
+        isUnique: isUniqueAcrossLanguage,
+      },
+      validation: (SlugRule) =>
+        SlugRule.custom((self) => {
+          if (!self || !self?.current) return true
+          const slug = self.current
+          if (toUrlSafe(slug) != slug) return 'Slug is not URL-safe'
+          return true
+        }),
       group: 'settings',
     }),
     defineField({
       name: 'parent',
       title: 'Parent page',
       type: 'reference',
+      description: 'Set parent page. Will place page at [parent slug]/slug',
       group: 'settings',
       to: [{ type: 'page' }],
       options: {
@@ -65,6 +80,10 @@ export default defineType({
       type: 'hero',
       name: 'hero',
       group: 'content',
+      options: {
+        collapsible: true, // Makes the whole fieldset collapsible
+        collapsed: true, // Defines if the fieldset should be collapsed by default or not
+      }
     }),
     defineField({
       title: "Content",

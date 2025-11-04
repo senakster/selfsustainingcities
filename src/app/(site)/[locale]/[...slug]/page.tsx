@@ -22,6 +22,7 @@ export async function generateStaticParams({ params }: { params: { locale: strin
 
 export default async function Page({ params }: { params: Promise<PageProps> }) {
   const { slug, locale } = await params;
+  console.log('Page', await params)
   const isPreview = await isDraftMode()
   let page: PageQueryProps | null = null;
   try {
@@ -37,7 +38,7 @@ export default async function Page({ params }: { params: Promise<PageProps> }) {
   
   return (
     <div className="">
-      <Hero headline={hero?.headline} leadText={hero?.leadText} image={hero?.image} className="bg-theme-quaternary" textClasses="text-foreground"/>
+      <Hero headline={hero?.headline} leadText={hero?.leadText} image={hero?.image} className="bg-theme-quarternary" textClasses="text-theme-secondary"/>
       <div className="py-12">
        <SectionsResolver sections={content || []} locale={language as typeof locales[number]} />
       </div>

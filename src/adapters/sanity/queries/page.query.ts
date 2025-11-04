@@ -38,8 +38,7 @@ export type PageQueryProps = {
  * @returns The page
  */
 export const pageQuery = groq`*[language == $language &&
-     _type in ["page"] &&
-    slug.current == $slug 
+     _type in ["page"] && slug.current == $slug
     && ((!defined(parent._ref) && !defined($parentSlug) ) || parent->slug.current == $parentSlug) && 
   ((!defined(parent->parent._ref) && !defined($grandParentSlug)) || parent->parent->slug.current == $grandParentSlug)
   ][0]{

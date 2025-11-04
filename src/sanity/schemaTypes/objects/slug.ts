@@ -2,9 +2,9 @@ import { defineType } from 'sanity'
 import { toUrlSafe, isUniqueAcrossLanguage} from '../../lib/helpers'
 
 export default defineType({
-    name: 'slug',
+    title: 'Slug',
+    name: 'customslug',
     type: 'slug',
-    description: 'Unique page identifier. Should preferably be generated.',
     options: {
       source: 'title',
       slugify: toUrlSafe,

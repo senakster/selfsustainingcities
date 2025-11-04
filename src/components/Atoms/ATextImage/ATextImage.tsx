@@ -24,7 +24,8 @@ export default function TextImage({ data }: { data: TextImageProps }) {
             </div>
             <div className={cn("flex-col gap-4", imageAlignment === 'left' ? 'order-2' : 'order-1')}>
                 <div className="size-full flex items-center justify-center text-center p-4 text-theme-secondary">
-                    <PortableText text={text} />
+                    <div><PortableText text={text} /></div>
+                    {/* <p className="text-base font-body">{text}</p> */}
                 </div>
                 <AFlexibleLink href={link.href} target={link.target}>{link.children}</AFlexibleLink>
             </div>

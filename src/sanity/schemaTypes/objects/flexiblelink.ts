@@ -10,13 +10,13 @@ export default defineType({
     defineField({
       name: "title",
       type: "string",
-      validation: (Rule) => Rule.required(),
+      // validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "href",
       type: "flexiblerefs",
       // hidden: ({ parent }) => !parent?.title,
-      validation: (Rule) => Rule.required(),
+      // validation: (Rule) => Rule.required(),
     }),
   ],
 });

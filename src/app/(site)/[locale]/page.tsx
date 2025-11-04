@@ -49,9 +49,11 @@ export default async function Home(props: HomeProps) {
   const { params: _params } = props;
   const isPreview = await isDraftMode()
   const params = await _params;
+  console.log({params})
   let page: PageQueryProps | null = null;
   try {
-  page = await getPage({ slug: [], language: (await params).locale || locales[0], isPreview });
+  page = await getPage({ slug: [], language: params.locale || locales[0], isPreview });
+  console.log({page})
   } catch (error) {
     console.error('error', error)
     notFound()

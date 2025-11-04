@@ -14,7 +14,7 @@ export default defineType({
       title: "text.0.children[0].text",
     },
     prepare(selection) {
-      return { title: selection.title };
+      return { title: selection.title, subtitle: 'Richtext' };
     },
   },
 });

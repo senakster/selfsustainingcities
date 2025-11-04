@@ -33,9 +33,9 @@ export const defaultDocumentNode: DefaultDocumentNodeResolver = (S, { schemaType
 // Customise this function to show the correct URL based on the current document
 async function getPreviewUrl(doc: SanityDocument, client: SanityClient) {
   const baseUrl = window.location.origin
-  const query = groq`*[_id == $id][0] { 'path': ${referencePathQuery} }`
+  const query = groq`*[_id == $id][0] { 'path': ${referencePathQuery}, language }`
   const res = await client.fetch(query, { id: doc._id, config: { cache: 'no-store' } })
   const urlPath = res?.path
-  const redirect = urlPath ? `&redirect=${encodeURIComponent(urlPath)}` : ''
+  const redirect = urlPath ? `&redirect=${encodeURIComponent(urlPath)}` : `&redirect=/${res?.language}`
   return `${baseUrl}/api/preview?token=${previewToken}${redirect}`
 }

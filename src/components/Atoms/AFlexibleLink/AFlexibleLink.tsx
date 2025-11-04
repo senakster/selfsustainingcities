@@ -18,7 +18,7 @@ export default function FlexibleLink({ href, locale, children, target, ...rest }
   const isExternal = href?.startsWith('http') || href?.startsWith('https') || href?.startsWith('//') || href?.startsWith('mailto') || href?.startsWith('tel') || href?.startsWith('www')
   const normalizedHref = href.startsWith('www') ? 'https://' + href : href
   return (
-    <Link className='underline hover:opacity-70' href={isExternal ? normalizedHref : locale ? `/${locale}${href}` : href} target={(target ?? isExternal) ? '_blank' : '_self'} {...rest}>
+    <Link className='hover:underline hover:opacity-70' href={isExternal ? normalizedHref : locale ? `/${locale}${href}` : href} target={(target ?? isExternal) ? '_blank' : '_self'} {...rest}>
       {children}
     </Link>
   )

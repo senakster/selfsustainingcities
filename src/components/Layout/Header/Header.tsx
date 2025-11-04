@@ -4,9 +4,8 @@ import { cn } from "@/lib/utils/cn";
 import Link from "@/components/Atoms/AFlexibleLink/AFlexibleLink";
 import Container from '@/components/Layout/Container/Container'
 import ALogo from "@/components/Atoms/ALogo/ALogo";
-import { sitemaps } from "@/lib/utils/getSitemap";
-import { SitemapItem } from "@/adapters/sanity/queries/sitemap.query";
-import { LanguageIcon } from '@/assets/icons/Language'
+
+import { navigation } from "@/lib/utils/getSitemap";
 
 type HeaderProps = {
   className: string;
@@ -22,13 +21,13 @@ export default function Header(props: HeaderProps) {
       <Container className={'grid grid-rows-1 grid-cols-[1fr_auto] items-center'}>
       <div>
         <Link href="/" locale={locale} className='hover:none w-min inline-block'>
-          <ALogo className='bg-theme-secondary' iconClassName='bg-theme-quaternary' />
+          <ALogo className='bg-theme-secondary' iconClassName='bg-theme-quarternary' />
         </Link>
       </div>
       <ul className="w-min flex gap-2 justify-between ml-4">
-        {sitemaps[locale]?.map(
-          (item: SitemapItem) => <li key={item.url}>
-          <Link href={item.url}>{item.url.replace(`/${locale}`, '').replace('/', '')}</Link>
+        {navigation[locale]?.map(
+          (item) => <li key={item.url}>
+          <Link href={item.url}>{item.title}</Link>
         </li>
         )}
         {/* <li>

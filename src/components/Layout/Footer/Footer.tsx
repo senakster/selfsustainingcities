@@ -8,7 +8,7 @@ type FooterProps = {
 export default function Footer(props: FooterProps) {
   const { className, ...rest } = props;
   return (
-    <footer className={cn('py-2 bg-theme-secondary min-h-[200px]', className)} {...rest}>
+    <footer className={cn('py-2 bg-theme-secondary min-h-[200px] hidden', className)} {...rest}>
       {/* <Container>
         <span></span>
       </Container> */}

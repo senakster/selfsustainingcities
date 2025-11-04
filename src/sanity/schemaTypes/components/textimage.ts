@@ -8,7 +8,7 @@ export default defineType({
         defineField(    {
             name: 'text',
             title: 'Text',
-            type: 'string',
+            type: 'portabletext',
         }),
         defineField({
             name: 'image',
@@ -31,13 +31,13 @@ export default defineType({
     ]   ,
     preview: {
         select: {
-            title: 'text',
+            title: 'text.0.children[0].text',
             image: 'image',
             link: 'link',
             imageAlignment: 'imageAlignment',
         },
         prepare(selection) {
-            return { title: selection.title, media: selection.image, subtitle: selection.imageAlignment };
+            return { title: selection.title, media: selection.image, subtitle: `Text-Image ${selection.imageAlignment}` };
         },
     }
 })
