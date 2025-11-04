@@ -39,7 +39,6 @@ const components: Partial<PortableTextReactComponents> = {
     linkInternal: LinkInternal,
     linkExternal: LinkExternal,
     link: (props) => {
-      console.log({props})
       return (
       <AFlexibleLink href={props?.value?.href ?? ''}>{props.children}</AFlexibleLink>
     )},

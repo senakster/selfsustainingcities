@@ -55,7 +55,15 @@ export const pageQuery = groq`*[language == $language &&
       ...,
       _type == 'textblock' => {
         text[]${portableTextSnippet}
-      }
+      },
+      _type == 'textimage' => {
+        text[]${portableTextSnippet},
+        image${imageSnippet},
+        link{
+          ...,
+        },
+        imageAlignment
+        },
     }
 }
 `

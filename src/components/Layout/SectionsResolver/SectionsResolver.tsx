@@ -2,9 +2,10 @@ import { locales } from '@/lib/i18n/locales'
 import { upperFirst } from '@/lib/utils/upperFirst'
 import { schema } from '@/sanity/schemaTypes' 
 import TextBlock from '@/components/Atoms/ATextBlock/AtextBlock'
-
+import TextImage from '@/components/Atoms/ATextImage/ATextImage'
 const Sections = {
-  Textblock: TextBlock
+  Textblock: TextBlock,
+  Textimage: TextImage
 }
 
 export type ComponentProps = {
@@ -21,9 +22,6 @@ export type SectionProps = {
 }
 
 export default function SectionsResolver({ sections, locale }: SectionProps) {
-  // return (<div>
-  //   {JSON.stringify(sections.map(section => resolveSections(section)))}
-  //   </div>)
   return (
     <>
       {sections.map((section, idx) => {

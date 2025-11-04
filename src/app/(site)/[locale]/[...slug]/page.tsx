@@ -37,9 +37,9 @@ export default async function Page({ params }: { params: Promise<PageProps> }) {
   
   return (
     <div className="">
-      <Hero headline={hero?.headline} leadText={hero?.leadText} image={hero?.image} />
+      <Hero headline={hero?.headline} leadText={hero?.leadText} image={hero?.image} className="bg-theme-secondary" textClasses="text-foreground"/>
       <div className="py-12">
-      <SectionsResolver sections={content || []} locale={language as typeof locales[number]} />
+       <SectionsResolver sections={content || []} locale={language as typeof locales[number]} />
       </div>
     </div>
   );

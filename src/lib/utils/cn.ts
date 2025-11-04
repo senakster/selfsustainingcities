@@ -6,6 +6,7 @@ export const twMerge = extendTailwindMerge({
         theme: {
             animate: ['animate-appear'],
             color: ['theme-primary', 'theme-secondary', 'theme-tertiary', 'theme-quarternary'],
+            text: ['text-theme-primary', 'text-theme-secondary', 'text-theme-tertiary', 'text-theme-quarternary', 'text-background','text-foreground'],
         },
     },
 })

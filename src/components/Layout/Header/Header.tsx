@@ -6,6 +6,8 @@ import Container from '@/components/Layout/Container/Container'
 import ALogo from "@/components/Atoms/ALogo/ALogo";
 import { sitemaps } from "@/lib/utils/getSitemap";
 import { SitemapItem } from "@/adapters/sanity/queries/sitemap.query";
+import { LanguageIcon } from '@/assets/icons/Language'
+
 type HeaderProps = {
   className: string;
   locale: typeof locales[number];
@@ -23,10 +25,10 @@ export default function Header(props: HeaderProps) {
           <ALogo className='bg-theme-secondary' iconClassName='bg-theme-quaternary' />
         </Link>
       </div>
-      <ul className="w-min flex gap-2 justify-between">
+      <ul className="w-min flex gap-2 justify-between ml-4">
         {sitemaps[locale]?.map(
           (item: SitemapItem) => <li key={item.url}>
-          <Link href={item.url}>{item.url.replace(`/${locale}`, '')}</Link>
+          <Link href={item.url}>{item.url.replace(`/${locale}`, '').replace('/', '')}</Link>
         </li>
         )}
         {/* <li>
@@ -38,7 +40,7 @@ export default function Header(props: HeaderProps) {
         <li>
           <Link href={"/contact"} locale={locale}>Contact</Link>
         </li> */}
-        <li>
+        <li className='ml-4'>
           <LanguageSwitcher locale={locale} />
         </li>
       </ul>

@@ -4,6 +4,7 @@ export default defineType({
   name: "contentblocks",
   type: "array",
   of: [
-    {type: 'textblock'}
+    {type: 'textblock'},
+    {type: 'textimage'}
   ],
 });

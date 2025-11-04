@@ -36,7 +36,7 @@ export default function AImage (props: AImageProps ) {
     const height = Math.round((width / baseAspectRatio) * cropFactor)
     return (
         <picture>
-        {aspectRatioDesktop && <Source media="(width >= 768px)" ratio={aspectRatioDesktop} />}
+        {aspectRatioDesktop && <Source media="(width >= 1024px)" ratio={aspectRatioDesktop} />}
         <Image
         className={cn('w-full', className)}
           src={getSanityImageSrc(imageObj, width, height)}
