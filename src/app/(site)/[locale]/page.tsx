@@ -17,11 +17,11 @@ export const revalidate = 3600; // 1 hour
 export async function generateMetadata ({params}: {params: Promise<{locale: string}>}) {
   const isPreview = await isDraftMode()
   try {
-  const page = await getPage({ slug: [], language: (await params).locale || locales[0], isPreview });
+  const page = await getPage({ language: (await params).locale || locales[0], isPreview, tags: [`${(await params).locale}-home`] });
   if (!page) {
     return {
-      title: 'Home',
-      description: 'Home',
+        title: 'Home',
+        description: 'Home',
     }
   }
   const { title, slug, seo} = page;
@@ -49,11 +49,9 @@ export default async function Home(props: HomeProps) {
   const { params: _params } = props;
   const isPreview = await isDraftMode()
   const params = await _params;
-  console.log({params})
   let page: PageQueryProps | null = null;
   try {
-  page = await getPage({ slug: [], language: params.locale || locales[0], isPreview });
-  console.log({page})
+  page = await getPage({ language: params.locale || locales[0], isPreview, tags: [`${params.locale}-home`] });
   } catch (error) {
     console.error('error', error)
     notFound()

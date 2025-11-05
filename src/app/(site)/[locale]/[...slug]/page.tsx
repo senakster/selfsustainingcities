@@ -22,11 +22,10 @@ export async function generateStaticParams({ params }: { params: { locale: strin
 
 export default async function Page({ params }: { params: Promise<PageProps> }) {
   const { slug, locale } = await params;
-  console.log('Page', await params)
   const isPreview = await isDraftMode()
   let page: PageQueryProps | null = null;
   try {
-  page = await getPage({ slug: slug, language: locale || locales[0], isPreview });
+  page = await getPage({ slug: slug, language: locale || locales[0], isPreview, tags: [`${locale}-${slug.join('-')}`] });
   } catch (error) {
     console.error('error', error)
     notFound()
