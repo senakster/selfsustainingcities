@@ -9,7 +9,7 @@ export default defineType({
   type: "document",
   groups: [
     { name: 'settings', title: 'Settings', icon: CogIcon },
-    { name: 'content', title: 'Content', icon: DashboardIcon },
+    { name: 'content', title: 'Content', icon: DashboardIcon, default: true },
     { name: 'seo', title: 'SEO', icon: SearchIcon },
   ],
   fields: [
