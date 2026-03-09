@@ -8,8 +8,8 @@
     }
   },
   "scripts": {
-    "dev": "cross-env NODE_OPTIONS=--no-webstorage next dev",
-    "build": "cross-env NODE_OPTIONS=--no-webstorage next build",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write .",
