@@ -1,9 +1,9 @@
 'use server'
 import 'server-only'
 
-
 import { createClient } from "next-sanity";
 import { apiVersion, dataset, projectId } from "../env";
+
 type TSanityFetchProps = {
   isPreview?: boolean
   token?: string
@@ -12,38 +12,53 @@ type TSanityFetchProps = {
   tags?: string[]
 }
 
-/** viewer token, hardcoded for now.  */
-const token = 'skloiPfF4e31lklWQTjBOpjzkk4w1K8RsFSEOsSQ4ZPEE4HS5dg7K6iEfmzgS2qikLjdevbGUhYEpP24VtSjWWcfYpFtkWK8oC21tZa4X5oR862Gzqa0q02BVg4P3HkRvWOnYV0FI9LQRzf2PNLu1iQDWPZMMPpze4bJOiMWYozZeW9hGt2v'
+/**
+ * Use a token only for preview (drafts). Published content is fetched without a token
+ * to avoid "Session not found" (SIO-401-ANF) when using session-based editor tokens on the server.
+ * If your dataset requires auth for read, set NEXT_PUBLIC_SANITY_TOKEN or SANITY_READ_TOKEN.
+ */
+const getReadToken = (): string | undefined =>
+  process.env.NEXT_PUBLIC_SANITY_TOKEN ||
+  process.env.SANITY_READ_TOKEN ||
+  undefined;
+
+const getPreviewToken = (): string | undefined =>
+  process.env.NEXT_SANITY_EDITOR_TOKEN ||
+  process.env.NEXT_PUBLIC_SANITY_TOKEN ||
+  undefined;
 
 export async function sanityClient<T>({
   isPreview,
   query,
   params = {},
   tags = [],
-}: TSanityFetchProps): Promise<T> { 
-    const response = createClient({
-      projectId,
-      dataset,
-      apiVersion,
-      useCdn: false, // Set to false if statically generating pages, using ISR or tag-based revalidation
-    }).fetch<T>(query, params, {
+}: TSanityFetchProps): Promise<T> {
+  const client = createClient({
+    projectId,
+    dataset,
+    apiVersion,
+    useCdn: !isPreview,
+  });
+
+  const response = client.fetch<T>(query, params, {
     ...(isPreview
       ? {
-          token,
+          token: getPreviewToken(),
           perspective: 'drafts',
           useCdn: false,
           cache: 'no-store',
         }
       : {
-          token,
+          token: getReadToken(),
           perspective: 'published',
-          useCdn: false,
+          useCdn: true,
           cache: 'force-cache',
         }),
     next: {
       tags,
     },
-  })
-  return response
+  });
+
+  return response;
 }
 
