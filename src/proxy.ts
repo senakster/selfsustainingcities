@@ -3,16 +3,16 @@ import { locales } from "@/lib/i18n/locales";
 
 const isLocalePath = (pathname: string) => {
   const firstPath = pathname.split("/")[1];
-  return {isLocale: locales.includes(firstPath as (typeof locales)[number]), firstPath};
+  return { isLocale: locales.includes(firstPath as (typeof locales)[number]), firstPath };
 };
 
-export default function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   if (pathname.startsWith("/studio")) {
     return NextResponse.next();
   }
 
-  const {  isLocale, firstPath } = isLocalePath(pathname);
+  const { isLocale, firstPath } = isLocalePath(pathname);
   if (!isLocale) {
     const newPath = `/${locales[0]}${pathname}`;
     return NextResponse.rewrite(new URL(`${newPath}`, request.url));
@@ -20,8 +20,8 @@ export default function middleware(request: NextRequest) {
 
   /** order is important */
 
-  if (firstPath === 'en') {
-    const newPath = '/' + pathname.split("/").slice(2).join("/");
+  if (firstPath === "en") {
+    const newPath = "/" + pathname.split("/").slice(2).join("/");
     return NextResponse.redirect(new URL(`${newPath}`, request.url));
   }
 
@@ -31,7 +31,7 @@ export default function middleware(request: NextRequest) {
 // Match all paths except for the following:
 export const config = {
   matcher: [
-    "/((?!api|_next/static|_next/image|assets|favicon.ico|sitemap.xml|studio|robots.txt|\.well-known/appspecific/com.chrome.devtools.json).*)",
+    "/((?!api|_next/static|_next/image|assets|favicon.ico|sitemap.xml|studio|robots.txt|\\.well-known/appspecific/com.chrome.devtools.json).*)",
     "/",
   ],
 };
