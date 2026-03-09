@@ -27,7 +27,7 @@ export default function TextImage({ data }: { data: TextImageProps }) {
                     <div><PortableText text={text} /></div>
                     {/* <p className="text-base font-body">{text}</p> */}
                 </div>
-                <AFlexibleLink href={link.href} target={link.target}>{link.children}</AFlexibleLink>
+                <AFlexibleLink href={link?.href} target={link?.target}>{link?.children}</AFlexibleLink>
             </div>
             </Container>
         </div>
