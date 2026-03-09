@@ -32,27 +32,21 @@ export async function sanityClient<T>({
     projectId,
     dataset,
     apiVersion,
-    useCdn: !isPreview,
+    useCdn: false,
   });
 
   const response = client.fetch<T>(query, params, {
     ...(isPreview
       ? {
-          token: getPreviewToken(),
-          perspective: 'drafts',
-          useCdn: false,
-          cache: 'no-store',
-        }
-      : {
-          perspective: 'published',
-          useCdn: true,
-          cache: 'force-cache',
-        }),
-    next: {
-      tags,
-    },
+        token: getPreviewToken(),
+        perspective: 'drafts',
+      }
+    : {
+      perspective: 'published',
+      next: {
+        tags,
+      },
+    }),
   });
-
   return response;
 }
-
