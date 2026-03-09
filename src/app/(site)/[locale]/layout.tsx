@@ -13,11 +13,8 @@ type LocaleLayoutProps = {
   params: Promise<{locale: string}>
 };
 
-export async function generateStaticParams() {
-  const isPreview = await isDraftMode()
-  if (isPreview) {
-    return []
-  }
+/** Always return all locales so /da (and every locale) is pre-rendered on Vercel. */
+export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
 }
 
