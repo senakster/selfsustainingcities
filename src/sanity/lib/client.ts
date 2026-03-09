@@ -14,17 +14,12 @@ type TSanityFetchProps = {
 
 /**
  * Use a token only for preview (drafts). Published content is fetched without a token
- * to avoid "Session not found" (SIO-401-ANF) when using session-based editor tokens on the server.
- * If your dataset requires auth for read, set NEXT_PUBLIC_SANITY_TOKEN or SANITY_READ_TOKEN.
+ * to avoid "Session not found" (SIO-401-ANF); Sanity allows anonymous read for published content by default.
+ * If your dataset requires auth for read, set SANITY_READ_TOKEN to a server API token (not a session token).
  */
-const getReadToken = (): string | undefined =>
-  process.env.NEXT_PUBLIC_SANITY_TOKEN ||
-  process.env.SANITY_READ_TOKEN ||
-  undefined;
-
 const getPreviewToken = (): string | undefined =>
-  process.env.NEXT_SANITY_EDITOR_TOKEN ||
   process.env.NEXT_PUBLIC_SANITY_TOKEN ||
+  process.env.NEXT_SANITY_EDITOR_TOKEN ||
   undefined;
 
 export async function sanityClient<T>({
@@ -49,7 +44,6 @@ export async function sanityClient<T>({
           cache: 'no-store',
         }
       : {
-          token: getReadToken(),
           perspective: 'published',
           useCdn: true,
           cache: 'force-cache',

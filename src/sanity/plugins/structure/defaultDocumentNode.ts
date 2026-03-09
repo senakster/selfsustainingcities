@@ -36,6 +36,12 @@ async function getPreviewUrl(doc: SanityDocument, client: SanityClient) {
   const query = groq`*[_id == $id][0] { 'path': ${referencePathQuery}, language }`
   const res = await client.fetch(query, { id: doc._id, config: { cache: 'no-store' } })
   const urlPath = res?.path
-  const redirect = urlPath ? `&redirect=${encodeURIComponent(urlPath)}` : `&redirect=/${res?.language}`
+  const language = res?.language
+  const fallbackPath = language ? `/${language}` : '/'
+  const redirectPath =
+    urlPath && urlPath.startsWith('/') && urlPath !== '/'
+      ? urlPath
+      : fallbackPath
+  const redirect = `&redirect=${encodeURIComponent(redirectPath)}`
   return `${baseUrl}/api/preview?token=${previewToken}${redirect}`
 }
