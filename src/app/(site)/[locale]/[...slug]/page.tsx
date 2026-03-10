@@ -14,8 +14,7 @@ export const revalidate = 3600; // 1 hour
 
 export async function generateStaticParams({ params }: { params: { locale: string, slug: string[] } }) {
   const { locale } = params;
-  const isPreview = await isDraftMode()
-  const data = await getPagesParams({ locale, isPreview });
+  const data = await getPagesParams({ locale });
   const pageParams = data.map(({ slugs }) => ({ slug: [ ...slugs]}))
   return pageParams;  
 }

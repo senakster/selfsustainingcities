@@ -1,5 +1,4 @@
-import { notFound } from "next/navigation";
-import {locales } from '@/lib/i18n/locales'
+import { locales } from '@/lib/i18n/locales'
 import SectionsResolver from "@/components/Layout/SectionsResolver/SectionsResolver";
 import Hero from '@/components/Layout/Hero/Hero';
 import { getPage } from "@/serverfunctions/load-page";
@@ -45,25 +44,32 @@ export async function generateMetadata ({params}: {params: Promise<{locale: stri
   }
 }
 
+/** Minimal fallback so /da (and any locale) always builds on Vercel even when Sanity has no content yet or fetch fails at build time */
+const emptyPage = (locale: string): PageQueryProps => ({
+  title: '',
+  slug: [],
+  language: locale,
+  hero: undefined,
+  content: [],
+})
+
 export default async function Home(props: HomeProps) {
   const { params: _params } = props;
   const isPreview = await isDraftMode()
   const params = await _params;
-  let page: PageQueryProps | null = null;
+  const locale = params.locale || locales[0]
+  let page: PageQueryProps | null = null
   try {
-  page = await getPage({ language: params.locale || locales[0], isPreview, tags: [`${params.locale}-home`] });
+    page = await getPage({ language: locale, isPreview, tags: [`${locale}-home`] })
   } catch (error) {
-    console.error('error', error)
-    notFound()
+    console.error('error fetching home page', error)
   }
-  if  (!page) {
-    notFound()
-  }
-  const { hero, content, language } = page;
+  const data = page ?? emptyPage(locale)
+  const { hero, content, language } = data
   return (
     <div className="">
       <Hero headline={hero?.headline} leadText={hero?.leadText} image={hero?.image} />
-      <SectionsResolver sections={content || []} locale={language as typeof locales[number]} />
+      <SectionsResolver sections={content || []} locale={(language ?? locale) as typeof locales[number]} />
     </div>
-  );
+  )
 }
